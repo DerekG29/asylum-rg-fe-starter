@@ -1,9 +1,9 @@
-import RenderLandingPage from '../components/pages/Landing/RenderLandingPage';
+import { LandingPage } from '../components/pages/Landing';
 
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 
 test('renders landing page', () => {
-  render(<RenderLandingPage />);
+  render(<LandingPage />);
   screen.debug();
 });
