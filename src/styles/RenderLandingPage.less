@@ -43,52 +43,47 @@
 
 .graphs-section {
     display: flex;
-    flex-direction: row;
-    max-width: 100%;
+    flex-flow: row wrap;
     justify-content: space-evenly;
-    margin-bottom: 2em;
+    align-items: center;
+    margin-bottom: 1rem;
 }
 
 .grant-rates-by-office-graph-container {
-  display: flex;
-  flex-direction: column;
-  max-height: fit-content;
-  align-items: center;
+    text-align: center;
+    font-family: acumin;
+    font-size: 1.5rem;
 }
 
 .grant-rates-by-nationality-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    text-align: center;
+    font-family: acumin;
+    font-size: 1.5rem;
 }
 
 .grant-rates-over-time-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    text-align: center;
+    font-family: acumin;
+    font-size: 1.5rem;
 }
 
 .gr-office-img {
-  width: 320px;
-  height: 165px;
-  margin-bottom: 2em;
+    width: 320px;
+    height: 165px;
+    margin-bottom: 10%;
 }
 
 .gr-nationality-img {
-  width: 200px;
-  height: 175px;
-  margin-bottom: 2em;
+    width: 200px;
+    height: 175px;
+    margin-bottom: 7%;
+    margin-left: -15px;
 }
 
 .gr-overtime-img {
-  width: 300px;
-  height: 165px;
-  margin-bottom: 2em;
-}
-
-p {
-  font-family: acumin;
-  font-size: 24px;
+    width: 300px;
+    height: 165px;
+    margin-bottom: 10%;
 }
 
 .view-more-data-btn-container {
@@ -147,15 +142,15 @@ p {
 @media @mobile-small {
     .header {
         height: 30vh;
-       display: block;
-       position: relative;
+        display: block;
+        position: relative;
     }
     .hrf-logo-img-container{
-       height:fit-content;
-       position: absolute;
-       top: 0;
-       left: 0;
-       margin: 2% 2%;
+        height:fit-content;
+        position: absolute;
+        top: 0;
+        left: 0;
+        margin: 2% 2%;
     }
 
     .hrf-logo-img-container img {
