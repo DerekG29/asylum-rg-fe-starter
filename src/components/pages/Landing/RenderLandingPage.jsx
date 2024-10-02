@@ -84,6 +84,7 @@ function RenderLandingPage(props) {
           </h3>
         </div>
       </div>
+
       <div className="bottom-section">
         <h1>Systemic Disparity Insights</h1>
         <div className="data-container">
@@ -108,13 +109,17 @@ function RenderLandingPage(props) {
         </div>
         <a href="https://humanrightsfirst.org/library/uscis-records-reveal-systemic-disparities-in-asylum-decisions/" target="_blank" rel="noreferrer">
           <div className="read-more-btn">
-            <Button><span>Read More</span></Button> 
+            <Button
+              type="default"
+              style={{ backgroundColor: '#404C4A', color: '#FFFFFF' }}
+            >Read More</Button>
           </div>
         </a>
           <p onClick={() => scrollToTop()} className="back-to-top">
             Back To Top ^
           </p>
       </div>
+      
     </div>
   );
 }
