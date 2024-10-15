@@ -16,7 +16,7 @@ import ScrollToTopOnMount from '../../../utils/scrollToTopOnMount';
 
 const { background_color } = colors;
 
-const URL = "https://hrf-asylum-be-b.herokuapp.com/cases";
+const URI = "https://hrf-asylum-be-b.herokuapp.com/cases";
 
 function GraphWrapper(props) {
   const { set_view, dispatch } = props;
@@ -52,65 +52,35 @@ function GraphWrapper(props) {
         break;
     }
   }
-  async function updateStateWithNewData(years, view, office, stateSettingCallback) {
-    /*
-          _                                                                             _
-        |                                                                                 |
-        |   Example request for once the `/summary` endpoint is up and running:           |
-        |                                                                                 |
-        |     `${url}/summary?to=2022&from=2015&office=ZLA`                               |
-        |                                                                                 |
-        |     so in axios we will say:                                                    |
-        |                                                                                 |     
-        |       axios.get(`${url}/summary`, {                                             |
-        |         params: {                                                               |
-        |           from: <year_start>,                                                   |
-        |           to: <year_end>,                                                       |
-        |           office: <office>,       [ <-- this one is optional! when    ]         |
-        |         },                        [ querying by `all offices` there's ]         |
-        |       })                          [ no `office` param in the query    ]         |
-        |                                                                                 |
-          _                                                                             _
-                                   -- Mack 
-    
-    */
 
-    if (office === 'all' || !office) {
-      axios
-        .get(process.env.REACT_APP_API_URI, {
-          // mock URL, can be simply replaced by `${Real_Production_URL}/summary` in prod!
-          params: {
-            from: years[0],
-            to: years[1],
-          },
-        })
-        .then(result => {
-          stateSettingCallback(view, office, test_data); // <-- `test_data` here can be simply replaced by `result.data` in prod!
-        })
-        .catch(err => {
-          console.error(err);
+  // All changes were made in this function
+  async function updateStateWithNewData(years, view, office, stateSettingCallback) {
+    const params = (office === 'all' || !office)
+      ? { from: years[0], to: years[1] }
+      : { from: years[0], to: years[1], office: office };
+
+    try {
+      let { data: citizenshipResults } = await axios.get(`${URI}/citizenshipSummary`);
+  
+      let { data } = await axios
+        .get(`${URI}/fiscalSummary`, {
+          params: params
         });
-    } else {
-      axios
-        .get(process.env.REACT_APP_API_URI, {
-          // mock URL, can be simply replaced by `${Real_Production_URL}/summary` in prod!
-          params: {
-            from: years[0],
-            to: years[1],
-            office: office,
-          },
-        })
-        .then(result => {
-          stateSettingCallback(view, office, test_data); // <-- `test_data` here can be simply replaced by `result.data` in prod!
-        })
-        .catch(err => {
-          console.error(err);
-        });
+  
+      data.citizenshipResults = citizenshipResults;
+  
+      console.log(data);
+  
+      stateSettingCallback(view, office, [data]);
+    } catch (error) {
+      console.error(error);
     }
   }
+
   const clearQuery = (view, office) => {
     dispatch(resetVisualizationQuery(view, office));
   };
+
   return (
     <div
       className="map-wrapper-container"
