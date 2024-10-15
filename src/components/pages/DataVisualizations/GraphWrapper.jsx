@@ -11,6 +11,7 @@ import ViewSelect from './ViewSelect';
 import axios from 'axios';
 import { resetVisualizationQuery } from '../../../state/actionCreators';
 import test_data from '../../../data/test_data.json';
+import api_test_data from '../../../data/api_test_data.json';
 import { colors } from '../../../styles/data_vis_colors';
 import ScrollToTopOnMount from '../../../utils/scrollToTopOnMount';
 
@@ -60,18 +61,17 @@ function GraphWrapper(props) {
       : { from: years[0], to: years[1], office: office };
 
     try {
-      let { data: citizenshipResults } = await axios.get(`${URI}/citizenshipSummary`);
-  
-      let { data } = await axios
-        .get(`${URI}/fiscalSummary`, {
-          params: params
-        });
-  
-      data.citizenshipResults = citizenshipResults;
-  
+      const [fiscalResults, citizenshipResults] = await Promise.all([
+        axios.get(`${URI}/fiscalSummary`, { params: params }),
+        axios.get(`${URI}/citizenshipSummary`)
+      ]);
+
+      const data = fiscalResults.data;
+      data.citizenshipResults = citizenshipResults.data;
+
       console.log(data);
   
-      stateSettingCallback(view, office, [data]);
+      stateSettingCallback(view, office, test_data);
     } catch (error) {
       console.error(error);
     }
