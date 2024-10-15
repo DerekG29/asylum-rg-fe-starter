@@ -16,6 +16,8 @@ import ScrollToTopOnMount from '../../../utils/scrollToTopOnMount';
 
 const { background_color } = colors;
 
+const URL = "https://hrf-asylum-be-b.herokuapp.com/cases";
+
 function GraphWrapper(props) {
   const { set_view, dispatch } = props;
   let { office, view } = useParams();
@@ -50,7 +52,7 @@ function GraphWrapper(props) {
         break;
     }
   }
-  function updateStateWithNewData(years, view, office, stateSettingCallback) {
+  async function updateStateWithNewData(years, view, office, stateSettingCallback) {
     /*
           _                                                                             _
         |                                                                                 |
