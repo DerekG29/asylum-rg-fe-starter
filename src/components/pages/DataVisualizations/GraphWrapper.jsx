@@ -59,21 +59,18 @@ function GraphWrapper(props) {
       ? { from: years[0], to: years[1] }
       : { from: years[0], to: years[1], office: office };
 
-    try {
-      const [fiscalResults, citizenshipResults] = await Promise.all([
-        axios.get(`${URI}/fiscalSummary`, { params: params }),
-        axios.get(`${URI}/citizenshipSummary`)
-      ]);
 
-      const data = fiscalResults.data;
-      data.citizenshipResults = citizenshipResults.data;
+    const [fiscalResults, citizenshipResults] = await Promise.all([
+      axios.get(`${URI}/fiscalSummary`, { params: params }),
+      axios.get(`${URI}/citizenshipSummary`)
+    ]);
 
-      console.log(data);
+    const data = fiscalResults.data;
+    data.citizenshipResults = citizenshipResults.data;
+
+    console.log(data);
   
-      stateSettingCallback(view, office, test_data);
-    } catch (error) {
-      console.error(error);
-    }
+    stateSettingCallback(view, office, test_data);
   }
 
   const clearQuery = (view, office) => {
