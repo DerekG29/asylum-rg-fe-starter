@@ -65,10 +65,11 @@ function GraphWrapper(props) {
       axios.get(`${URI}/citizenshipSummary`)
     ]);
 
-    const data = fiscalResults.data;
+    let data = fiscalResults.data;
     data.citizenshipResults = citizenshipResults.data;
+    data = [data];
   
-    stateSettingCallback(view, office, test_data);
+    stateSettingCallback(view, office, data);
   }
 
   const clearQuery = (view, office) => {
