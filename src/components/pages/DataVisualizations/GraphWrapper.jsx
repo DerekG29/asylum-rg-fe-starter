@@ -67,8 +67,6 @@ function GraphWrapper(props) {
 
     const data = fiscalResults.data;
     data.citizenshipResults = citizenshipResults.data;
-
-    console.log(data);
   
     stateSettingCallback(view, office, test_data);
   }
