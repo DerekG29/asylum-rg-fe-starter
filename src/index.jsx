@@ -28,6 +28,16 @@ import { colors } from './styles/data_vis_colors';
 
 const { primary_accent_color } = colors;
 
+const layoutStyle = {
+  minHeight: '100vh',
+  display: 'flex',
+  flexDirection: 'column',
+};
+
+const footerStyle = {
+  marginTop: 'auto'
+};
+
 const store = configureStore({ reducer: reducer });
 ReactDOM.render(
   <Router>
@@ -45,7 +55,7 @@ ReactDOM.render(
 export function App() {
   const { Footer, Header } = Layout;
   return (
-    <Layout>
+    <Layout style={layoutStyle}>
       <Header
         style={{
           height: '10vh',
@@ -62,22 +72,24 @@ export function App() {
         <Route path="/profile" component={ProfilePage} />
         <Route component={NotFoundPage} />
       </Switch>
-      <Footer
-        style={{
-          backgroundColor: primary_accent_color,
-          color: '#E2F0F7',
-        }}
-      >
-        <FooterContent />
-      </Footer>
-      <Footer
-        style={{
-          backgroundColor: primary_accent_color,
-          padding: 0,
-        }}
-      >
-        <SubFooter />
-      </Footer>
+      <div className="footer-wrapper" style={footerStyle}>
+        <Footer
+          style={{
+            backgroundColor: primary_accent_color,
+            color: '#E2F0F7',
+          }}
+        >
+          <FooterContent />
+        </Footer>
+        <Footer
+          style={{
+            backgroundColor: primary_accent_color,
+            padding: 0,
+          }}
+        >
+          <SubFooter />
+        </Footer>
+      </div>
     </Layout>
   );
 }
