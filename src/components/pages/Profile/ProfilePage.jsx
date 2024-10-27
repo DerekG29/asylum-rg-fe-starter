@@ -3,7 +3,9 @@
 function ProfilePage() {
 
   return (
-    <div>Profile Page</div>
+      <div className="profile-container" style={{ height: "300px" }}>
+        Profile Page
+      </div>
   );
 }
 

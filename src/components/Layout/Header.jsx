@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import Logo from '../../styles/Images/WhiteLogo.png';
 import { colors } from '../../styles/data_vis_colors';
 
+import LoginButton from '../../auth/login-button';
+
 const { primary_accent_color } = colors;
 
 function HeaderContent() {
@@ -28,9 +30,10 @@ function HeaderContent() {
         <Link to="/graphs" style={{ color: '#E2F0F7', paddingRight: '75px' }}>
           Graphs
         </Link>
-        <Link to="/profile" style={{ color: '#E2F0F7' }}>
+        <Link to="/profile" style={{ color: '#E2F0F7', paddingRight:'75px' }}>
           Profile
         </Link>
+        <LoginButton />
       </div>
     </div>
   );
